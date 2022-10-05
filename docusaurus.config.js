@@ -76,7 +76,7 @@ const config = {
             position: 'left',
           },
           {type: 'docSidebar', sidebarId: 'diff_core', label: 'Diff Core', position: 'left'},
-          {type: 'docSidebar', sidebarId: 'api', label: 'API', position: 'left'},
+          {type: 'docSidebar', sidebarId: 'api', label: 'APIs', position: 'left'},
           {type: 'docSidebar', sidebarId: 'guides', label: 'Guides', position: 'left'},
           // {to: '/blog', label: 'Blog', position: 'left'}, // remove to turn on blog
           {
