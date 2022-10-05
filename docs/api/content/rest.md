@@ -5,6 +5,4 @@ title: REST API
 description: Description of REST API
 ---
 
-# GraphQL Metadata API
-
 The API has the following schema:
