@@ -7,7 +7,7 @@ title: Supported Databases
 |---------------|-------------------------------------------------------------------------------------------------------------------------------------|--------|
 | PostgreSQL >=10    | `postgresql://<user>:<password>@<host>:5432/<database>`                                                                             |  💚    |
 | MySQL         | `mysql://<user>:<password>@<hostname>:5432/<database>`                                                                              |  💚    |
-| Snowflake     | `"snowflake://<user>[:<password>]@<account>/<database>/<SCHEMA>?warehouse=<WAREHOUSE>&role=<role>[&authenticator=externalbrowser]"` |  💚    |
+| Snowflake     | With password:`"snowflake://<USER>:<password>@<ACCOUNT>/<DATABASE>/<SCHEMA>?warehouse=<WAREHOUSE>&role=<ROLE>"`, With SSO: `"snowflake://<USER>@<ACCOUNT>/<DATABASE>/<SCHEMA>?warehouse=<WAREHOUSE>&role=<ROLE>&authenticator=externalbrowser"` |  💚    |
 | BigQuery      | `bigquery://<project>/<dataset>`                                                                                                    |  💚    |
 | Redshift      | `redshift://<username>:<password>@<hostname>:5439/<database>`                                                                       |  💚    |
 | Oracle        | `oracle://<username>:<password>@<hostname>/database`                                                                                |  💛    |
