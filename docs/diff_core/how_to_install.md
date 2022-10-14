@@ -35,10 +35,4 @@ You can also install several drivers at once:
 
 ```pip install 'data-diff[mysql,postgresql,snowflake]'```
 
-If you're using PostgreSQL, you'll need to install `psycopg2`. If you run into issues with `psycopg2` [dependencies](https://www.psycopg.org/docs/install.html#build-prerequisites), an easy solution is to install [psycopg2-binary](https://www.psycopg.org/docs/install.html#quick-install) by running:
-
-```pip install psycopg2-binary```
-
-Note that for production use, it is advised to use `psycopg2`.
-
 _<sup>*</sup> Some drivers have dependencies that cannot be installed using `pip` and still need to be installed manually._
