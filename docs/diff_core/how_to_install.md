@@ -5,7 +5,9 @@ title: How to install
 
 First, install `data-diff` using `pip`.
 
-```pip install data-diff```
+```
+pip install data-diff
+```
 
 **Note:** Throughout this guide, the command `pip` is used. Depending on your computer's setup, you MAY need to use `pip3` in place of `pip`. Once you've installed Python 3.7+, it's most likely that `pip` and `pip3` can be used interchangeably. Please reach out [via slack](https://locallyoptimistic.slack.com/archives/C03HUNGQV0S) if you're stuck.
 
