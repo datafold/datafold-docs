@@ -14,10 +14,45 @@ To run `data-diff` from the command line, run this command:
 Let's break this down. Assume there are two tables stored in two databases, and you want to know the differences between those tables.
 
 - `DB1_URI` will be a string that `data-diff` uses to connect to the database where the first table is stored.
-- `TABLE1_NAME` is the name of the table in that database.
+- `TABLE1_NAME` is the name of the table in the `DB1_URI` database.
 - `DB2_URI` will be a string that `data-diff` uses to connect to the database where the second table is stored.
-- `TABLE2_NAME` is the name of the second table in that database.
+- `TABLE2_NAME` is the name of the second table in the `DB2_URI` database.
 - `[OPTIONS]` can be replaced with a variety of additional commands, [detailed here](#options).
+
+
+
+| Database      | Connection string                                                                                                                   | Status |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------|--------|
+| PostgreSQL >=10    | `postgresql://'<user>':<password>@<host>:5432/<database>`                                                                             |  💚    |
+| MySQL         | `mysql://<user>:<password>@<hostname>:5432/<database>`                                                                              |  💚    |
+| Snowflake     | **With password:**`"snowflake://<USER>:<password>@<ACCOUNT>/<DATABASE>/<SCHEMA>?warehouse=<WAREHOUSE>&role=<ROLE>"`<br />**With SSO:** `"snowflake://<USER>@<ACCOUNT>/<DATABASE>/<SCHEMA>?warehouse=<WAREHOUSE>&role=<ROLE>&authenticator=externalbrowser"`<br />_Note: Unless something is explicitly case sensitive (like your password) use all caps._ |  💚    |
+| BigQuery      | `bigquery://<project>/<dataset>`                                                                                                    |  💚    |
+| Redshift      | `redshift://<username>:<password>@<hostname>:5439/<database>`                                                                       |  💚    |
+| Oracle        | `oracle://<username>:<password>@<hostname>/database`                                                                                |  💛    |
+| Presto        | `presto://<username>:<password>@<hostname>:8080/<database>`                                                                         |  💛    |
+| Databricks    | `databricks://<http_path>:<access_token>@<server_hostname>/<catalog>/<schema>`                                                      |  💛    |
+| Trino         | `trino://<username>:<password>@<hostname>:8080/<database>`                                                                          |  💛    |
+| Clickhouse    | `clickhouse://<username>:<password>@<hostname>:9000/<database>`                                                                     |  💛    |
+| Vertica       | `vertica://<username>:<password>@<hostname>:5433/<database>`                                                                        |  💛    |
+| ElasticSearch |                                                                                                                                     |  📝    |
+| Planetscale   |                                                                                                                                     |  📝    |
+| Pinot         |                                                                                                                                     |  📝    |
+| Druid         |                                                                                                                                     |  📝    |
+| Kafka         |                                                                                                                                     |  📝    |
+| DuckDB        |                                                                                                                                     |  📝    |
+| SQLite        |                                                                                                                                     |  📝    |
+
+* 💚: Implemented and thoroughly tested.
+* 💛: Implemented, but not thoroughly tested yet.
+* ⏳: Implementation in progress.
+* 📝: Implementation planned. Contributions welcome.
+
+If a database is not on the list, we'd still love to support it. Open an issue
+to discuss it.
+
+Notes: 
+- Because URLs allow many special characters, and may collide with the syntax of your command-line,
+it's recommended to surround them with quotes. Alternatively, you may provide them in a TOML file via the `--config` option.
 
 ### Options:
 
@@ -50,6 +85,8 @@ Same-DB diff only:
                             Example: `-m test_mat_%t`
   - `--assume-unique-key` - Skip validating the uniqueness of the key column during joindiff, which is costly in non-cloud dbs.
   - `--sample-exclusive-rows` - Sample several rows that only appear in one of the tables, but not the other. Use with `-s`.
+  - `--materialize-all-rows` - Materialize every row, even if they are the same, instead of just the differing rows.
+  - `--table-write-limit` - Maximum number of rows to write when creating materialized or sample tables, per thread. Default=1000.
 
 Cross-DB diff only:
   - `--bisection-threshold` - Minimal size of segment to be split. Smaller segments will be downloaded and compared locally.
@@ -128,3 +165,7 @@ for different_row in diff_tables(table1, table2):
 ```
 
 Run `help(diff_tables)` or [read the docs](https://data-diff.readthedocs.io/en/latest/) to learn about the different options.
+
+
+
+

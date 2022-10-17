@@ -23,7 +23,9 @@ You sure do! And that will catch any errors that you've written a test for. `dat
 
 For example, if you write a test to check if a primary key is `unique` and `not_null`, that won't catch if your code change or data migration has caused certain primary keys to disappear💨, or to be slightly altered😱. That's where `data-diff` comes in.
 
-### Oh, you'd like a list of amazing things `data-diff` can do?
+[TODO I think the Loom would be good to include here.]
+
+### Here's a list of amazing things `data-diff` can do
 
 * ⇄  Verifies across [many different databases][#] [TODO add link to DBs] (e.g. PostgreSQL ⇄ Snowflake) or within a database
 * 🔍 Outputs [diff of rows](#example-command-and-output) in detail

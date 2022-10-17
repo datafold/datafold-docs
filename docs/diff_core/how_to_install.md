@@ -13,7 +13,7 @@ pip install data-diff
 
 ## Install drivers
 
-Then, you will need to install one or more driver(s) specific to the database(s) you want to connect to.
+Then, you will need to install one or more driver(s) specific to the database(s) you want to connect to.*
 
 - `pip install 'data-diff[mysql]'`
 
