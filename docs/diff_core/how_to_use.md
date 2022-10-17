@@ -78,7 +78,7 @@ it's recommended to surround them with quotes. Alternatively, you may provide th
   - `--no-tracking` - data-diff sends home anonymous usage data. Use this to disable it.
   - `-a`, `--algorithm` `[auto|joindiff|hashdiff]` - Force algorithm choice
 
-Same-DB diff only:
+**Same-DB diff only:**
   - `-m`, `--materialize` - Materialize the diff results into a new table in the database.
                             If a table exists by that name, it will be replaced.
                             Use `%t` in the name to place a timestamp.
@@ -88,7 +88,7 @@ Same-DB diff only:
   - `--materialize-all-rows` - Materialize every row, even if they are the same, instead of just the differing rows.
   - `--table-write-limit` - Maximum number of rows to write when creating materialized or sample tables, per thread. Default=1000.
 
-Cross-DB diff only:
+**Cross-DB diff only:**
   - `--bisection-threshold` - Minimal size of segment to be split. Smaller segments will be downloaded and compared locally.
   - `--bisection-factor` - Segments per iteration. When set to 2, it performs binary search.
 
@@ -98,7 +98,7 @@ Cross-DB diff only:
 
 Data-diff lets you load the configuration for a run from a TOML file.
 
-Reasons to use a configuration file:
+**Reasons to use a configuration file:**
 
 - Convenience - Set-up the parameters for diffs that need to run often
 
