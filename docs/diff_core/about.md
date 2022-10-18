@@ -11,8 +11,7 @@ It's fast, easy to use, and reliable. Even at massive scale.
 ## How to use
 
 ### Quickly identify issues when migrating data between databases
-_[TODO replace this draft image--Matt is mocking up a new version]_
-![](../../static/img/draft_os_diff.png)
+![](../../static/img/diff_xdb.png)
 
 ### Improve code reviews by identifying data problems you don't have tests for
 _[TODO replace this Loom with a more polished version that includes some new features]_
