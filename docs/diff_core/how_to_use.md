@@ -23,7 +23,7 @@ Let's break this down. Assume there are two tables stored in two databases, and 
 
 | Database      | Connection string                                                                                                                   | Status |
 |---------------|-------------------------------------------------------------------------------------------------------------------------------------|--------|
-| PostgreSQL >=10    | `postgresql://'<user>':<password>@<host>:5432/<database>`                                                                             |  💚    |
+| PostgreSQL >=10    | `postgresql://<user>:'<password>'@<host>:5432/<database>`                                                                             |  💚    |
 | MySQL         | `mysql://<user>:<password>@<hostname>:5432/<database>`                                                                              |  💚    |
 | Snowflake     | **With password:**`"snowflake://<USER>:<password>@<ACCOUNT>/<DATABASE>/<SCHEMA>?warehouse=<WAREHOUSE>&role=<ROLE>"`<br />**With SSO:** `"snowflake://<USER>@<ACCOUNT>/<DATABASE>/<SCHEMA>?warehouse=<WAREHOUSE>&role=<ROLE>&authenticator=externalbrowser"`<br />_Note: Unless something is explicitly case sensitive (like your password) use all caps._ |  💚    |
 | BigQuery      | `bigquery://<project>/<dataset>`                                                                                                    |  💚    |
