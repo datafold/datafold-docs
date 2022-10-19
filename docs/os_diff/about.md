@@ -14,8 +14,8 @@ It's fast, easy to use, and reliable. Even at massive scale.
 ![](../../static/img/diff_xdb.png)
 
 ### Improve code reviews by identifying data problems you don't have tests for
-_[TODO replace this Loom with a more polished version that includes some new features]_
-<iframe width="640" height="414" src="https://www.loom.com/embed/4ddda4625ae14abfae5d6f264412e50a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe width="640" height="414" src="https://www.loom.com/embed/682e4b7d74e84eb4824b983311f0a3b2" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 
 
 ### Here's a list of amazing things `data-diff` can do!
