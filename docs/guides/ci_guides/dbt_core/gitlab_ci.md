@@ -5,8 +5,6 @@ title: GitLab CI
 * [Basic Config](gitlab_ci.md#basic-config)
 * [Advanced Config](gitlab_ci.md#advanced-config)
 
-TODO environment variables section nice to have
-
 ## Basic Config
 
 This job runs in two scenarios, determined in the `rules:` section:

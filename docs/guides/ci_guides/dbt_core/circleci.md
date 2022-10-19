@@ -5,7 +5,6 @@ title: CircleCI
 * [Basic Config](circleci.md#basic-config)
 * [Advanced Config](circleci.md#advanced-config)
 
-TODO environment variables section nice to have
 
 ## Basic Config
 

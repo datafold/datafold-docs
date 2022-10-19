@@ -8,7 +8,6 @@ title: GitHub Actions
 * [Advanced Config](github_actions.md#advanced-config)
     * [Advanced Pull Request Job](github_actions.md#advanced-pull-request-job)
 
-TODO environment variables section nice to have
 
 ## Basic Config
 
