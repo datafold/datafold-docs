@@ -38,7 +38,7 @@ Connects to the given database, and creates a TableSegment instance
 * **key_columns** – Names of the key columns
 * **thread_count** – Number of threads for this connection (only if using a threadpooled db implementation)
 
-See also: `connect()`
+See also: [`connect()`](#connect)
 
 ----
 
@@ -69,7 +69,7 @@ Note: The following parameters are used to override the corresponding attributes
 list(diff_tables(table1, table1))
 []`
 
-See also: TableSegment, HashDiffer, JoinDiffer
+See also: [TableSegment](#tablesegment), [HashDiffer](#hashdiffer), [JoinDiffer](#joindiffer)
 
 ----
 
