@@ -5,7 +5,8 @@ title: Python API Reference
 
 ----
 
-### `data_diff.connect(_db_conf: Union[str, dict], thread_count: Optional[int] = 1_)→ Database`
+### `connect()`
+`data_diff.connect(_db_conf: Union[str, dict], thread_count: Optional[int] = 1_)→ Database`
 
 
 Connect to a database using the given database configuration.
@@ -25,7 +26,8 @@ Supported drivers: - postgresql - mysql - oracle - snowflake - bigquery - redshi
 
 ----
 
-### `data_diff.connect_to_table(_db_info: Union[str, dict], table_name: Union[Tuple[str, ...], str], key_columns: str = ('id',), thread_count: Optional[int] = 1, **kwargs_)→ TableSegment`
+### `connect_to_table()`
+`data_diff.connect_to_table(_db_info: Union[str, dict], table_name: Union[Tuple[str, ...], str], key_columns: str = ('id',), thread_count: Optional[int] = 1, **kwargs_)→ TableSegment`
 
 Connects to the given database, and creates a TableSegment instance
 
@@ -40,7 +42,8 @@ See also: `connect()`
 
 ----
 
-### `data_diff.diff_tables(table1: TableSegment, table2: TableSegment, *, key_columns: Optional[Sequence[str]] = None, update_column: Optional[str] = None, extra_columns: Optional[Tuple[str, ...]] = None, min_key: Optional[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]] = None, max_key: Optional[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]] = None, min_update: Optional[datetime] = None, max_update: Optional[datetime] = None, algorithm: Algorithm = Algorithm.HASHDIFF, bisection_factor: int = 32, bisection_threshold: int = 16384, threaded: bool = True, max_threadpool_size: Optional[int] = 1)→ Iterator`
+### `diff_tables()`
+`data_diff.diff_tables(table1: TableSegment, table2: TableSegment, *, key_columns: Optional[Sequence[str]] = None, update_column: Optional[str] = None, extra_columns: Optional[Tuple[str, ...]] = None, min_key: Optional[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]] = None, max_key: Optional[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]] = None, min_update: Optional[datetime] = None, max_update: Optional[datetime] = None, algorithm: Algorithm = Algorithm.HASHDIFF, bisection_factor: int = 32, bisection_threshold: int = 16384, threaded: bool = True, max_threadpool_size: Optional[int] = 1)→ Iterator`
 
 Finds the diff between table1 and table2.
 
@@ -70,7 +73,8 @@ See also: TableSegment, HashDiffer, JoinDiffer
 
 ----
 
-### `class data_diff.HashDiffer(_threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, bisection_factor: int = 32, bisection_threshold: Number = 16384, stats: dict[(Any*Any)] = <factory>_)`
+### `HashDiffer()`
+`class data_diff.HashDiffer(_threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, bisection_factor: int = 32, bisection_threshold: Number = 16384, stats: dict[(Any*Any)] = <factory>_)`
 
 Finds the diff between two SQL tables
 
@@ -85,9 +89,13 @@ Works best for comparing tables that are mostly the same, with minor discrepenci
 * **threaded** (_bool_) – Enable/disable threaded diffing. Needed to take advantage of database threads.
 * **max_threadpool_size** (_int_) – Maximum size of each threadpool. None means auto. Only relevant when threaded is True. There may be many pools, so number of actual threads can be a lot higher.
 
+#### `HashDiffer.__init()`
+
 ```
 __init__(threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, bisection_factor: int = 32, bisection_threshold: Number = 16384, stats: dict[(Any*Any)] = <factory>)→ None
 ```
+
+#### `HashDiffer.diff_tables()`
 
 ```
 diff_tables(table1: TableSegment, table2: TableSegment)→ Iterator[Tuple[str, tuple]]
@@ -106,7 +114,8 @@ An iterator that yield pair-tuples, representing the diff. Items can be either -
 
 ----
 
-### `classdata_diff.JoinDiffer(threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, validate_unique_key: bool = True, sample_exclusive_rows: bool = True, materialize_to_table: (NoneType+tuple[str]) = None, materialize_all_rows: bool = False, table_write_limit: int = 1000, stats: dict[(Any*Any)] = <factory>)`
+### `JoinDiffer()`
+`classdata_diff.JoinDiffer(threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, validate_unique_key: bool = True, sample_exclusive_rows: bool = True, materialize_to_table: (NoneType+tuple[str]) = None, materialize_all_rows: bool = False, table_write_limit: int = 1000, stats: dict[(Any*Any)] = <factory>)`
 
 Finds the diff between two SQL tables in the same database, using JOINs.
 
@@ -123,9 +132,13 @@ All parameters are optional.
 * **materialize_to_table** (_DbPath_) – Path of new table to write diff results to. Disabled if not provided.
 * **table_write_limit** (_int_) – Maximum number of rows to write when materializing, per thread.
 
+#### JoinDiffer.__init__()
+
 ```
 __init__(threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, validate_unique_key: bool = True, sample_exclusive_rows: bool = True, materialize_to_table: (NoneType+tuple[str]) = None, materialize_all_rows: bool = False, table_write_limit: int = 1000, stats: dict[(Any*Any)] = <factory>)→ None
 ```
+
+#### JoinDiffer.diff_tables()
 
 ```
 diff_tables(table1: TableSegment, table2: TableSegment)→ Iterator[Tuple[str, tuple]]
@@ -142,7 +155,9 @@ An iterator that yield pair-tuples, representing the diff. Items can be either -
 
 ----
 
-### `classdata_diff.TableSegment(database: Database = <object object>, table_path: tuple[str] = <object object>, key_columns: tuple[str] = <object object>, update_column: (NoneType+str) = None, extra_columns: tuple[str] = (), min_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, max_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, min_update: (NoneType+datetime) = None, max_update: (NoneType+datetime) = None, where: (NoneType+str) = None, case_sensitive: bool = True, _schema: (NoneType+CaseAwareMapping) = None)**`
+### `TableSegment()
+
+`classdata_diff.TableSegment(database: Database = <object object>, table_path: tuple[str] = <object object>, key_columns: tuple[str] = <object object>, update_column: (NoneType+str) = None, extra_columns: tuple[str] = (), min_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, max_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, min_update: (NoneType+datetime) = None, max_update: (NoneType+datetime) = None, where: (NoneType+str) = None, case_sensitive: bool = True, _schema: (NoneType+CaseAwareMapping) = None)**`
 
 Signifies a segment of rows (and selected columns) within a table
 
@@ -160,48 +175,62 @@ Signifies a segment of rows (and selected columns) within a table
 * **where** (_str_, optional) – An additional ‘where’ expression to restrict the search space.
 * **case_sensitive** (_bool_) – If false, the case of column names will adjust according to the schema. Default is true.
 
-#### `with_schema()→ TableSegment`
+#### `TableSegment.with_schema()`
+`with_schema()→ TableSegment`
 Queries the table schema from the database, and returns a new instance of TableSegment, with a schema.
 
-#### `get_values()→ list`
+#### `TableSegment.get_values()`
+`get_values()→ list`
 Download all the relevant values of the segment from the database
 
-#### `choose_checkpoints(count: int)→ List[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]]`
+#### `TableSegment.choose_checkpoints()`
+`choose_checkpoints(count: int)→ List[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]]`
 Suggests a bunch of evenly-spaced checkpoints to split by (not including start, end)
 
-#### `segment_by_checkpoints(checkpoints: List[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]])→ List[TableSegment]`
+#### `TableSegment.segment_by_checkpoints()`
+`segment_by_checkpoints(checkpoints: List[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]])→ List[TableSegment]`
 Split the current TableSegment to a bunch of smaller ones, separated by the given checkpoints
 
-#### `new(**kwargs)→ TableSegment`
+#### `TableSegment.new()`
+`new(**kwargs)→ TableSegment`
 Using new() creates a copy of the instance using ‘replace()’
 
-#### `count()→ Tuple[int, int]`
+#### `TableSegment.count()`
+ `count()→ Tuple[int, int]`
 Count how many rows are in the segment, in one pass.
 
-#### `count_and_checksum()→ Tuple[int, int]`
+#### `TableSegment.count_and_checksum()`
+`count_and_checksum()→ Tuple[int, int]`
 Count and checksum the rows in the segment, in one pass.
 
+#### `TableSegment.__init__()`
 ```
 __init__(database: Database = <object object>, table_path: tuple[str] = <object object>, key_columns: tuple[str] = <object object>, update_column: (NoneType+str) = None, extra_columns: tuple[str] = (), min_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, max_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, min_update: (NoneType+datetime) = None, max_update: (NoneType+datetime) = None, where: (NoneType+str) = None, case_sensitive: bool = True, _schema: (NoneType+CaseAwareMapping) = None)→ None
 ```
 
 ----
 
-### `classdata_diff.databases.database_types.AbstractDatabase`
+### `AbstractDatabase`
+`classdata_diff.databases.database_types.AbstractDatabase`
 
-#### _abstract_ `select_table_schema(path: Tuple[str, ...])→ str`
+#### `AbstractDatabase.select_table_schema()`
+_abstract_ `select_table_schema(path: Tuple[str, ...])→ str`
 Provide SQL for selecting the table schema as (name, type, date_prec, num_prec)
 
-#### _abstract_ `query_table_schema(path: Tuple[str, ...])→ Dict[str, tuple]`
+#### `AbstractDatabase.query_table_schema()`
+_abstract_ `query_table_schema(path: Tuple[str, ...])→ Dict[str, tuple]`
 Query the table for its schema for table in ‘path’, and return {column: tuple} where the tuple is (table_name, col_name, type_repr, datetime_precision?, numeric_precision?, numeric_scale?)
 
-#### _abstract_ `parse_table_name(name: str)→ Tuple[str, ...]`
+#### `AbstractDatabase.parse_table_name()`
+_abstract_ `parse_table_name(name: str)→ Tuple[str, ...]`
 Parse the given table name into a DbPath
 
-#### _abstract_ `close()`
+#### `AbstractDatabase.close()`
+_abstract_ `close()`
 Close connection(s) to the database instance. Querying will stop functioning.
 
-#### `normalize_value_by_type(value: str, coltype: ColType)→ str`
+#### `AbstractDatabase.normalize_value_by_type()`
+`normalize_value_by_type(value: str, coltype: ColType)→ str`
 Creates an SQL expression, that converts ‘value’ to a normalized representation.
 
 The returned expression must accept any SQL value, and return a string.
@@ -218,36 +247,46 @@ FractionalType  -> normalize_number()
 
 ----
 
-### _class_ `data_diff.databases.database_types.AbstractDialect`
+### `AbstractDialect`
+_class_ `data_diff.databases.database_types.AbstractDialect`
 Dialect-dependent query expressions
 
-#### _abstract_ `quote(s: str)`
+#### `AbstractDialect.quote()`
+_abstract_ `quote(s: str)`
 Quote SQL name
 
-#### _abstract_ `concat(l: List[str])→ str`
+#### `AbstractDialect.concat()`
+_abstract_ `concat(l: List[str])→ str`
 Provide SQL for concatenating a bunch of columns into a string
 
-#### _abstract_ `is_distinct_from(a: str, b: str)→ str`
+#### `AbstractDialect.is_distinct_from()`
+_abstract_ `is_distinct_from(a: str, b: str)→ str`
 Provide SQL for a comparison where NULL = NULL is true
 
-#### _abstract_ `to_string(s: str)→ str`
+#### `AbstractDialect.to_string()`
+_abstract_ `to_string(s: str)→ str`
 Provide SQL for casting a column to string
 
-#### _abstract_ `random()→ str`
+#### `AbstractDialect.random()`
+_abstract_ `random()→ str`
 Provide SQL for generating a random number betweein 0..1
 
-#### _abstract_ `offset_limit(offset: Optional[int] = None, limit: Optional[int] = None)`
+#### `AbstractDialect.offset_limit()`
+_abstract_ `offset_limit(offset: Optional[int] = None, limit: Optional[int] = None)`
 Provide SQL fragment for limit and offset inside a select
 
-#### _abstract_ `explain_as_text(query: str)→ str`
+#### ``AbstractDialect.explain_as_text()`
+_abstract_ `explain_as_text(query: str)→ str`
 Provide SQL for explaining a query, returned as table(varchar)
 
-#### _abstract_ `timestamp_value(t: datetime)→ str`
+#### `AbstractDialect.timestamp_value()`
+_abstract_ `timestamp_value(t: datetime)→ str`
 Provide SQL for the given timestamp value
 
 ----
 
-### `data_diff.DbKey`
+### `DbKey`
+`data_diff.DbKey`
 
 The central part of internal API.
 
@@ -257,7 +296,8 @@ alias of `Union`[`int`, `str`, `bytes`, `ArithUUID`, `ArithAlphanumeric`]
 
 ----
 
-### `data_diff.DbTime= <class 'datetime.datetime'>)`
+### `DbTime`
+`data_diff.DbTime= <class 'datetime.datetime'>)`
 
 datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])
 
@@ -265,7 +305,8 @@ The year, month and day arguments are required. tzinfo may be None, or an instan
 
 ----
 
-### `data_diff.DbPath`
+### `DbPath`
+`data_diff.DbPath`
 The central part of internal API.
 
 This represents a generic version of type ‘origin’ with type arguments ‘params’. There are two kind of these aliases: user defined and special. The special ones are wrappers around builtin collections and ABCs in collections.abc. These must have ‘name’ always set. If ‘inst’ is False, then the alias can’t be instantiated, this is used by e.g. typing.List and typing.Dict.
@@ -274,7 +315,8 @@ alias of `Tuple`[`str`, …]
 
 ----
 
-### `enum data_diff.Algorithm(value)`
+### `Algorithm`
+`enum data_diff.Algorithm(value)`
 
 An enumeration.
 
