@@ -1,6 +1,6 @@
 ---
-sidebar_position: 7
-title: Implementing a New Database Driver
+sidebar_position: 8
+title: How to Implement a New Database Driver
 ---
 
 First, read through the [CONTRIBUTING.md](https://github.com/datafold/data-diff/blob/master/CONTRIBUTING.md) document.
