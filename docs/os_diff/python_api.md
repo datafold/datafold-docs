@@ -5,7 +5,8 @@ title: Python API Reference
 
 ----
 
-### <a id="connect"></a> data_diff.connect(_db_conf: Union[str, dict], thread_count: Optional[int] = 1_)→ Database
+### `data_diff.connect(_db_conf: Union[str, dict], thread_count: Optional[int] = 1_)→ Database`
+
 
 Connect to a database using the given database configuration.
 
@@ -24,7 +25,7 @@ Supported drivers: - postgresql - mysql - oracle - snowflake - bigquery - redshi
 
 ----
 
-### data_diff.connect_to_table(_db_info: Union[str, dict], table_name: Union[Tuple[str, ...], str], key_columns: str = ('id',), thread_count: Optional[int] = 1, **kwargs_)→ TableSegment
+### `data_diff.connect_to_table(_db_info: Union[str, dict], table_name: Union[Tuple[str, ...], str], key_columns: str = ('id',), thread_count: Optional[int] = 1, **kwargs_)→ TableSegment`
 
 Connects to the given database, and creates a TableSegment instance
 
@@ -35,11 +36,11 @@ Connects to the given database, and creates a TableSegment instance
 * **key_columns** – Names of the key columns
 * **thread_count** – Number of threads for this connection (only if using a threadpooled db implementation)
 
-See also: [`connect()`](#connect)
+See also: `connect()`
 
 ----
 
-### data_diff.diff_tables(_table1: TableSegment, table2: TableSegment, *, key_columns: Optional[Sequence[str]] = None, update_column: Optional[str] = None, extra_columns: Optional[Tuple[str, ...]] = None, min_key: Optional[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]] = None, max_key: Optional[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]] = None, min_update: Optional[datetime] = None, max_update: Optional[datetime] = None, algorithm: Algorithm = Algorithm.HASHDIFF, bisection_factor: int = 32, bisection_threshold: int = 16384, threaded: bool = True, max_threadpool_size: Optional[int] = 1_)→ Iterator
+### `data_diff.diff_tables(table1: TableSegment, table2: TableSegment, *, key_columns: Optional[Sequence[str]] = None, update_column: Optional[str] = None, extra_columns: Optional[Tuple[str, ...]] = None, min_key: Optional[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]] = None, max_key: Optional[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]] = None, min_update: Optional[datetime] = None, max_update: Optional[datetime] = None, algorithm: Algorithm = Algorithm.HASHDIFF, bisection_factor: int = 32, bisection_threshold: int = 16384, threaded: bool = True, max_threadpool_size: Optional[int] = 1)→ Iterator`
 
 Finds the diff between table1 and table2.
 
@@ -61,17 +62,15 @@ Note: The following parameters are used to override the corresponding attributes
 
 #### Example
 
-```
-table1 = connect_to_table('postgresql:///', 'Rating', 'id')
+`table1 = connect_to_table('postgresql:///', 'Rating', 'id')
 list(diff_tables(table1, table1))
-[]
-```
+[]`
 
-See also: [TableSegment](#tablesegment), [HashDiffer](#hashdiffer), [JoinDiffer](#joindiffer)
+See also: TableSegment, HashDiffer, JoinDiffer
 
 ----
 
-### <a id="hashdiffer"></a>class data_diff.HashDiffer(_threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, bisection_factor: int = 32, bisection_threshold: Number = 16384, stats: dict[(Any*Any)] = <factory>_)
+### `class data_diff.HashDiffer(_threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, bisection_factor: int = 32, bisection_threshold: Number = 16384, stats: dict[(Any*Any)] = <factory>_)`
 
 Finds the diff between two SQL tables
 
@@ -98,8 +97,8 @@ Diff the given tables.
 
 #### Parameters
 
-* **table1** ([_TableSegment_](#tablesegment)) – The “before” table to compare. Or: source table
-* **table2** ([_TableSegment_](#tablesegment)) – The “after” table to compare. Or: target table
+* **table1** (TableSegment) – The “before” table to compare. Or: source table
+* **table2** (TableSegment) – The “after” table to compare. Or: target table
 
 #### Returns
 
@@ -107,7 +106,7 @@ An iterator that yield pair-tuples, representing the diff. Items can be either -
 
 ----
 
-### <a id="joindiffer"></a> classdata_diff.JoinDiffer(_threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, validate_unique_key: bool = True, sample_exclusive_rows: bool = True, materialize_to_table: (NoneType+tuple[str]) = None, materialize_all_rows: bool = False, table_write_limit: int = 1000, stats: dict[(Any*Any)] = <factory>_)
+### `classdata_diff.JoinDiffer(threaded: bool = True, max_threadpool_size: (int+NoneType) = 1, validate_unique_key: bool = True, sample_exclusive_rows: bool = True, materialize_to_table: (NoneType+tuple[str]) = None, materialize_all_rows: bool = False, table_write_limit: int = 1000, stats: dict[(Any*Any)] = <factory>)`
 
 Finds the diff between two SQL tables in the same database, using JOINs.
 
@@ -135,15 +134,15 @@ Diff the given tables.
 
 #### Parameters
 
-* **table1** ([_TableSegment_](#tablesegment)) – The “before” table to compare. Or: source table
-* **table2** ([_TableSegment_](#tablesegment)) – The “after” table to compare. Or: target table
+* **table1** (TableSegment) – The “before” table to compare. Or: source table
+* **table2** (TableSegment) – The “after” table to compare. Or: target table
 
 #### Returns
 An iterator that yield pair-tuples, representing the diff. Items can be either - (‘-’, row) for items in table1 but not in table2. (‘+’, row) for items in table2 but not in table1. Where row is a tuple of values, corresponding to the diffed columns.
 
 ----
 
-### <a id="tablesegment"></a> classdata_diff.TableSegment(database: Database = <object object>, table_path: tuple[str] = <object object>, key_columns: tuple[str] = <object object>, update_column: (NoneType+str) = None, extra_columns: tuple[str] = (), min_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, max_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, min_update: (NoneType+datetime) = None, max_update: (NoneType+datetime) = None, where: (NoneType+str) = None, case_sensitive: bool = True, _schema: (NoneType+CaseAwareMapping) = None)
+### `classdata_diff.TableSegment(database: Database = <object object>, table_path: tuple[str] = <object object>, key_columns: tuple[str] = <object object>, update_column: (NoneType+str) = None, extra_columns: tuple[str] = (), min_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, max_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, min_update: (NoneType+datetime) = None, max_update: (NoneType+datetime) = None, where: (NoneType+str) = None, case_sensitive: bool = True, _schema: (NoneType+CaseAwareMapping) = None)**`
 
 Signifies a segment of rows (and selected columns) within a table
 
@@ -161,25 +160,25 @@ Signifies a segment of rows (and selected columns) within a table
 * **where** (_str_, optional) – An additional ‘where’ expression to restrict the search space.
 * **case_sensitive** (_bool_) – If false, the case of column names will adjust according to the schema. Default is true.
 
-#### with_schema()→ [TableSegment](#tablesegment)
+#### `with_schema()→ TableSegment`
 Queries the table schema from the database, and returns a new instance of TableSegment, with a schema.
 
-#### get_values()→ list
+#### `get_values()→ list`
 Download all the relevant values of the segment from the database
 
-#### choose_checkpoints(_count: int_)→ List[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]]
+#### `choose_checkpoints(count: int)→ List[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]]`
 Suggests a bunch of evenly-spaced checkpoints to split by (not including start, end)
 
-#### segment_by_checkpoints(_checkpoints: List[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]]_)→ List[[TableSegment](#tablesegment)]
+#### `segment_by_checkpoints(checkpoints: List[Union[int, str, bytes, ArithUUID, ArithAlphanumeric]])→ List[TableSegment]`
 Split the current TableSegment to a bunch of smaller ones, separated by the given checkpoints
 
-#### new(_**kwargs_)→ [TableSegment](#tablesegment)
+#### `new(**kwargs)→ TableSegment`
 Using new() creates a copy of the instance using ‘replace()’
 
-#### count()→ Tuple[int, int]
+#### `count()→ Tuple[int, int]`
 Count how many rows are in the segment, in one pass.
 
-#### count_and_checksum()→ Tuple[int, int]
+#### `count_and_checksum()→ Tuple[int, int]`
 Count and checksum the rows in the segment, in one pass.
 
 ```
@@ -188,21 +187,21 @@ __init__(database: Database = <object object>, table_path: tuple[str] = <object 
 
 ----
 
-### classdata_diff.databases.database_types.AbstractDatabase
+### `classdata_diff.databases.database_types.AbstractDatabase`
 
-#### _abstract_ select_table_schema(_path: Tuple[str, ...]_)→ str
+#### _abstract_ `select_table_schema(path: Tuple[str, ...])→ str`
 Provide SQL for selecting the table schema as (name, type, date_prec, num_prec)
 
-#### _abstract_ query_table_schema(_path: Tuple[str, ...]_)→ Dict[str, tuple]
+#### _abstract_ `query_table_schema(path: Tuple[str, ...])→ Dict[str, tuple]`
 Query the table for its schema for table in ‘path’, and return {column: tuple} where the tuple is (table_name, col_name, type_repr, datetime_precision?, numeric_precision?, numeric_scale?)
 
-#### _abstract_ parse_table_name(_name: str_)→ Tuple[str, ...]
+#### _abstract_ `parse_table_name(name: str)→ Tuple[str, ...]`
 Parse the given table name into a DbPath
 
-#### _abstract_ close()
+#### _abstract_ `close()`
 Close connection(s) to the database instance. Querying will stop functioning.
 
-#### normalize_value_by_type(_value: str, coltype: ColType_)→ str
+#### `normalize_value_by_type(value: str, coltype: ColType)→ str`
 Creates an SQL expression, that converts ‘value’ to a normalized representation.
 
 The returned expression must accept any SQL value, and return a string.
@@ -219,36 +218,36 @@ FractionalType  -> normalize_number()
 
 ----
 
-### _class_ data_diff.databases.database_types.AbstractDialect
+### _class_ `data_diff.databases.database_types.AbstractDialect`
 Dialect-dependent query expressions
 
-#### _abstract_ quote(_s: str_)
+#### _abstract_ `quote(s: str)`
 Quote SQL name
 
-#### _abstract_ concat(_l: List[str]_)→ str
+#### _abstract_ `concat(l: List[str])→ str`
 Provide SQL for concatenating a bunch of columns into a string
 
-#### _abstract_ is_distinct_from(_a: str, b: str_)→ str
+#### _abstract_ `is_distinct_from(a: str, b: str)→ str`
 Provide SQL for a comparison where NULL = NULL is true
 
-#### _abstract_ to_string(_s: str_)→ str
+#### _abstract_ `to_string(s: str)→ str`
 Provide SQL for casting a column to string
 
-#### _abstract_ random()→ str
+#### _abstract_ `random()→ str`
 Provide SQL for generating a random number betweein 0..1
 
-#### _abstract_ offset_limit(_offset: Optional[int] = None, limit: Optional[int] = None_)
+#### _abstract_ `offset_limit(offset: Optional[int] = None, limit: Optional[int] = None)`
 Provide SQL fragment for limit and offset inside a select
 
-#### _abstract_ explain_as_text(_query: str_)→ str
+#### _abstract_ `explain_as_text(query: str)→ str`
 Provide SQL for explaining a query, returned as table(varchar)
 
-#### _abstract_ timestamp_value(_t: datetime_)→ str
+#### _abstract_ `timestamp_value(t: datetime)→ str`
 Provide SQL for the given timestamp value
 
 ----
 
-### data_diff.DbKey
+### `data_diff.DbKey`
 
 The central part of internal API.
 
@@ -258,7 +257,7 @@ alias of `Union`[`int`, `str`, `bytes`, `ArithUUID`, `ArithAlphanumeric`]
 
 ----
 
-### data_diff.DbTime= _<class 'datetime.datetime'>)_
+### `data_diff.DbTime= <class 'datetime.datetime'>)`
 
 datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])
 
@@ -266,7 +265,7 @@ The year, month and day arguments are required. tzinfo may be None, or an instan
 
 ----
 
-### data_diff.DbPath
+### `data_diff.DbPath`
 The central part of internal API.
 
 This represents a generic version of type ‘origin’ with type arguments ‘params’. There are two kind of these aliases: user defined and special. The special ones are wrappers around builtin collections and ABCs in collections.abc. These must have ‘name’ always set. If ‘inst’ is False, then the alias can’t be instantiated, this is used by e.g. typing.List and typing.Dict.
@@ -275,7 +274,7 @@ alias of `Tuple`[`str`, …]
 
 ----
 
-### _enum_ data_diff.Algorithm(_value_)
+### `enum data_diff.Algorithm(value)`
 
 An enumeration.
 
