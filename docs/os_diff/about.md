@@ -6,7 +6,7 @@ title: About
 #### data-diff enables data professionals to detect differences in values between any two tables. 
 It's fast, easy to use, and reliable. Even at massive scale.
 
-[Join us on GitHub](https://github.com/datafold/data-diff#readme) if you'd like to contribute to this open source library!
+[Join us on GitHub](https://github.com/datafold/data-diff) if you'd like to contribute to this open source library!
 
 ## How to use
 
