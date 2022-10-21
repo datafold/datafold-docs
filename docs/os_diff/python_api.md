@@ -155,7 +155,7 @@ An iterator that yield pair-tuples, representing the diff. Items can be either -
 
 ----
 
-### `TableSegment()
+### `TableSegment()`
 
 `classdata_diff.TableSegment(database: Database = <object object>, table_path: tuple[str] = <object object>, key_columns: tuple[str] = <object object>, update_column: (NoneType+str) = None, extra_columns: tuple[str] = (), min_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, max_key: (NoneType+(str+bytes+int+ArithUUID+ArithAlphanumeric)) = None, min_update: (NoneType+datetime) = None, max_update: (NoneType+datetime) = None, where: (NoneType+str) = None, case_sensitive: bool = True, _schema: (NoneType+CaseAwareMapping) = None)**`
 
