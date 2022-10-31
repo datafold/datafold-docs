@@ -33,7 +33,7 @@ Complete the configuration by specifying the following fields:
 | Job that builds production tables | This becomes selectable after a valid API key is filled in. Select the job that builds production tables. |
 | Skip for pull/merge requests | When selected, the Datafold CI pipeline won't be run on pull/merge requests |
 | Job that builds pull requests  | This becomes selectable after a valid API key is filled in. Select the job that builds pull requests. |
-| Primary key tag | See [dbt Integration](./) |
+| Primary key tag | See [dbt Integration](./dbt_adv_config.md) |
 | Sync metadata on every push to production | When selected, will sync the metadata from the dbt run with Datafold every time a push happens on the default branch.|
 | Sync metadata on a schedule | Set a schedule to synchronize the dbt metadata (columns and table descriptions, tags, owners, etc), use this when you run the production job on a schedule. |
 | Files to ignore | If defined, the files matching the pattern will be ignored in the PRs. The pattern uses the syntax of .gitignore. Excluded files can be re-included by using the negation; re-included files can be later re-excluded again to narrow down the filter. For example, to exclude everything except the `/dbt` folder, but not the dbt `.md` files, do:`*!dbt/*dbt/*.md`|
