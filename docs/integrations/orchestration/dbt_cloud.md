@@ -9,13 +9,16 @@ description: Integrate Datafold with dbt Cloud jobs
 - To access the dbt API Datafold requires a dbt **Team** account or higher.
 - You will need either a [Service Token](https://docs.getdbt.com/docs/dbt-cloud-apis/service-tokens) or a [User Token](https://docs.getdbt.com/docs/dbt-cloud-apis/user-tokens):
     - **Service Token (Recommended):** 
-        - Navigate to **Account Settings -> Service Tokens -> + New Token**
+        - Navigate to **Account Settings -> Service Tokens -> + New Token** <br/><br/>
+            ![](../../../static/img/dbt_cloud_add_service_token.png) <br/><br/>
+            
             - Add a Token Name
-            - Add a Permission Set
+            - Add a Permission Set <br/><br/>
+                ![](../../../static/img/dbt_cloud_add_service_token_permission.png) <br/><br/>
                 - Permission Set: Member
                 - Project: All Projects, or check only the projects to use with Datafold
-                - Save <br/>
-                ![](../../../static/img/dbt_cloud_service_token.png) <br/>
+                - Save <br/><br/>
+                ![](../../../static/img/dbt_cloud_service_token.png) <br/><br/>
     - **User Token:**
         - Navigate to **Your Profile -> API Access**
             - Copy
