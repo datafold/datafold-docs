@@ -5,7 +5,7 @@ description: Description of datafold-sdk
 ---
 # datafold-sdk
 ### Prerequisites
-- To use the datafold sdk you must first connect a [Data Source](integrations/data_warehouses/dw_overview.md) and connect a [GitHub](/integrations/git/github.md) or [GitLab](/integrations/git/gitlab.md) account.
+- To use the Datafold sdk, you must first connect a [Data Source](integrations/data_warehouses/dw_overview.md) and connect a [GitHub](/integrations/git/github.md) or [GitLab](/integrations/git/gitlab.md) account.
 
 ### Steps to complete
 - [Configure **datafold-sdk** on Datafold](datafold-sdk.md#configure-datafold-sdk-on-datafold)

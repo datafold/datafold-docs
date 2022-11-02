@@ -8,7 +8,7 @@ description: Advanced configuration options for dbt projects
 
 ### Prerequisites
 
-Make sure Datafold GitHub [integration is set up.](/integrations/git/github.md)
+- To configure dbt Cloud, you must first connect a [Data Source](integrations/data_warehouses/dw_overview.md) and connect a [GitHub](/integrations/git/github.md) or [GitLab](/integrations/git/gitlab.md) account.
 
 ### **Tag primary keys in dbt model**
 
@@ -29,8 +29,6 @@ The first option is setting the `primary-key` tag in the dbt metadata. There are
 Here's an example of how you would specify that the `user_id` column is the primary key of the `users` table in a yaml file.
 
 ```
-version: 2
-
 models:
   - name: users
 
