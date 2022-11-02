@@ -16,17 +16,35 @@ Datafold needs to know which column is the primary key of the table to perform t
 
 ![](../../../static/img/primary_key_not_set.png)
 
-When setting up the CI integration, one of the steps is proving the primary-key tag:
+When setting up the CI integration, one of the steps is providing the primary key tag:
 
 ![](../../../static/img/primary_key_tag.png)
 
-This tag we can use in the dbt metadata to let Datafold know which column can be used to perform the diff. Datafold supports composite primary keys, meaning that you can assign multiple columns that make up the primary key together. There are three ways of doing this, which we'll discuss next:
+We use this in the dbt metadata to let Datafold know which column can be used to perform the diff. Datafold supports composite primary keys, meaning that you can assign multiple columns that make up the primary key together. There are three ways of doing this, which we'll discuss next:
 
 #### Metadata
 
-The first one is setting the tag in the [dbt metadata](https://docs.getdbt.com/reference/resource-configs/meta). We set the primary key tag to `primary-key`so we use this in the metadata.
+The first option is setting the `primary-key` tag in the dbt metadata. There are [several ways to configure this](https://docs.getdbt.com/reference/resource-configs/meta) in your dbt project using either the `meta` key in a yaml file or a model-specific config block.
 
-Table metadata can also be used to specify per-model diff options. In the example below diff is configured to compare only rows matching `user_id > 2350`. The expression in the filter is an SQL expression and can be anything you could put into `where` clause when selecting from the tables. Also you can include columns (`include_columns`) which will be used when diffing, and exclude (`exclude_columns`) some of them. For time dimension you can set a time column of \`time\_travel\` field. If you want to add time travelling, you can define `prod_time_travel` for travelling of a production model,  `pr_time_travel` of a PR model but, please, keep in mind that not all databases support time traveling.
+Here's an example of how you would specify that the `user_id` column is the primary key of the `users` table in a yaml file.
+
+```
+version: 2
+
+models:
+  - name: users
+
+    columns:
+      - name: user_id
+        meta:
+          primary-key: true
+```
+
+Table metadata can also be used to specify per-model diff options. In the example below, diff is configured to compare only rows matching `user_id > 2350`. The expression in the filter is an SQL expression, and can be anything you could put into `where` clause when selecting from the tables.
+
+You can also include (`include_columns`) or exclude (`exclude_columns`) columns which will be used when diffing.
+
+For time dimensions, you can set a time column of \`time\_travel\` field. If you want to add time travelling, you can define `prod_time_travel` for travelling of a production model,  `pr_time_travel` of a PR model. Please keep in mind that not all databases support time traveling.
 
 ```
 models:
@@ -79,7 +97,7 @@ models:
 
 #### Inferred
 
-If the primary key isn't provided explicitly, Datafold will try to assume a pk from dbt's uniqueness tests. If you have a single column uniqueness test defined, it will use this column as the PK:
+If the primary key isn't provided explicitly, Datafold will try to assume a primary key from dbt's uniqueness tests. If you have a single column uniqueness test defined, it will use this column as the PK.
 
 ```
 models:
@@ -90,7 +108,7 @@ models:
           - unique
 ```
 
-Also, model level uniqueness tests are used for inferring the PK:
+Also, model level uniqueness tests are used for inferring the PK.
 
 ```
 models:
@@ -113,7 +131,7 @@ models:
           column_name: "CONCAT(col1, col2)"
 ```
 
-Finally, we also support `unique_combination_of_columns` from the `dbt_utils` package:
+Finally, we support `unique_combination_of_columns` from the `dbt_utils` package:
 
 ```
 models:
@@ -133,7 +151,7 @@ Keep in mind that this is a failover mechanism. If you change the uniqueness tes
 
 #### Checking primary key annotations
 
-You can check what models in your dbt repo already have primary key annotations, and which need more attention. You'll need to install Datafold SDK and configure access parameters:
+You can check what models in your dbt repo already have primary key annotations, and which need more attention. You'll need to install Datafold SDK and configure access parameters.
 
 ```
 $ pip3 install 'datafold-sdk>=0.0.6'
@@ -145,7 +163,7 @@ $ export DATAFOLD_HOST=https://<hostname>
 $ export DATAFOLD_APIKEY=RSSQrpfddSEEK8WVtc0zd27f9nsdhPU3AxZ
 ```
 
-After that you need to compile manifest.json and you are ready to do the check:
+After that, you need to compile `manifest.json`, and you'll be ready to do the check.
 
 ```
 # Lookup your CI configuration id in URL when you go to Settings -> CI settings -> <name>:
@@ -180,9 +198,9 @@ The other fields in the printout are:
 
 ### dbt metadata synchronization
 
-Datafold integrates very well with dbt, and also has the ability to ingest the metadata provided by dbt automatically. dbt models has metadata that can be synchronized from the production branch into the Datafold catalog. When a table has metadata being synchronized using dbt, user editing is no longer permitted for that entire table. This is to ensure that there is a single source of truth.
+Datafold integrates very well with dbt, and also has the ability to ingest the metadata provided by dbt automatically. dbt models have metadata that can be synchronized from the production branch into the Datafold catalog. When a table has metadata being synchronized using dbt, user editing is no longer permitted for that entire table. This is to ensure that there is a single source of truth.
 
-Metadata can be applied both on a table and column level:
+Metadata can be applied both on a table and column level.
 
 ```
 models:
