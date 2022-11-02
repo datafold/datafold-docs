@@ -16,7 +16,7 @@ To set up a new integration click on the repository field to access the **Instal
 
 ![](../../../static/img/github_install_button.png)
 
-From here GitHub will redirect you to login to your account and choose which organization you would like to connect. After choosing the right organization, you may choose to allow access to all repositories or specific ones. 
+From here, GitHub will redirect you to login to your account and choose which organization you would like to connect. After choosing the right organization, you may choose to allow access to all repositories or specific ones. 
 
 When complete, you'll be redirected back to Datafold, where you can choose the appropriate repository for connection. 
 

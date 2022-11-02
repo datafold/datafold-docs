@@ -12,7 +12,7 @@ To set up a new integration select the **GitLab** button.
 
 ![](../../../static/img/gitlab_setup.png)
 
-To get the [project access token](https://docs.gitlab.com/ee/user/project/settings/project\_access\_tokens.html) navigate to your GitLab project settings and create a new token. Project access tokens are preferred over personal tokens for security.
+To get the [project access token](https://docs.gitlab.com/ee/user/project/settings/project\_access\_tokens.html), navigate to your GitLab project settings and create a new token. Project access tokens are preferred over personal tokens for security.
 
 ![](../../../static/img/gitlab_access_token.png)
 
