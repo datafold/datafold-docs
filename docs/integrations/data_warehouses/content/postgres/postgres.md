@@ -24,6 +24,10 @@ CREATE SCHEMA datafold_tmp;
 
 CREATE ROLE datafold WITH LOGIN ENCRYPTED PASSWORD 'SOMESECUREPASSWORD';
 
+/* Give the datafole role write access to the temporary schema */
+
+GRANT ALL ON SCHEMA datafold_tmp TO datafold;
+
 /* Make sure that the postgres user has read permissions on the tables */
 
 GRANT USAGE ON SCHEMA <myschema> TO datafold;
