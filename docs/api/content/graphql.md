@@ -231,6 +231,512 @@ query GetLineage($primaryUid: ID = "c949a00ec65a40989c533ec979ca66c3") {
   </Tabs>
 ```
 
+## Additional Examples
+
+```mdx-code-block
+<Tabs>
+  <TabItem value="get-table-uid" label="Get Table UID" >
+```
+Query:
+```graphql
+query GetTableUID($path: String = "4233.INTEGRATION.BEERS.BEERS") {
+    table(path: $path) {
+    uid
+    }
+}
+```
+Response:
+```json
+{
+    "data": {
+        "table": {
+            "uid": "2fcbe9c680ae48a98b522075bd0f03cb"
+        }
+    }
+}
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="get-downstream-tables" label="Get Downstream Tables" >
+```
+
+Query:
+```graphql
+query GetDownstreamTables($primaryUid: ID! = "2fcbe9c680ae48a98b522075bd0f03cb"
+  , $lineageFilter: LineageFilter = {
+     depthUpstream: 0,
+     depthDownstream: 10
+  }) 
+  {
+    lineage(primaryUid: $primaryUid, lineageFilter: $lineageFilter){
+        primary{
+            ... on Table{
+            uid
+            prop{
+              path
+            }
+        }
+        }
+        entities{
+            ...on Table{
+                uid
+                prop{
+                    path
+                    dataSourceId
+                }
+            }
+        }
+    }
+  }
+```
+
+Response:
+```json
+{
+    "data": {
+        "lineage": {
+            "primary": {
+                "uid": "2fcbe9c680ae48a98b522075bd0f03cb",
+                "prop": {
+                    "path": "\"INTEGRATION\".\"BEERS\".\"BEERS\""
+                }
+            },
+            "entities": [
+                {
+                    "uid": "f489c4907c564c689228354e787db745",
+                    "prop": {
+                        "path": "\"INTEGRATION\".\"BEERS\".\"SALES\"",
+                        "dataSourceId": "4233"
+                    }
+                },
+                {
+                    "uid": "2fcbe9c680ae48a98b522075bd0f03cb",
+                    "prop": {
+                        "path": "\"INTEGRATION\".\"BEERS\".\"BEERS\"",
+                        "dataSourceId": "4233"
+                    }
+                },
+                {
+                    "uid": "85f8fa19449e4a32ad05f8390a7368e3",
+                    "prop": {
+                        "path": "\"INTEGRATION\".\"BEERS\".\"BEERS_WITH_BREWERIES\"",
+                        "dataSourceId": "4233"
+                    }
+                },
+                {
+                    "uid": "5c3789c61d8943eb912c9c54f11c6dc0",
+                    "prop": {
+                        "path": "\"INTEGRATION\".\"BEERS\".\"ORDERS_GENERATED\"",
+                        "dataSourceId": "4233"
+                    }
+                },
+                {
+                    "uid": "ee1af33ff4e040c995b7ce944dcf4139",
+                    "prop": {
+                        "path": "\"INTEGRATION\".\"BEERS\".\"ORDER_LINES\"",
+                        "dataSourceId": "4233"
+                    }
+                },
+                {
+                    "uid": "01104759077444ca80155892c249fe2d",
+                    "prop": {
+                        "path": "\"INTEGRATION\".\"BEERS\".\"PROMO_DELIVERIES\"",
+                        "dataSourceId": "4233"
+                    }
+                },
+                {
+                    "uid": "01104759077444ca80155892c249fe2d",
+                    "prop": {
+                        "path": "\"INTEGRATION\".\"BEERS\".\"PROMO_DELIVERIES\"",
+                        "dataSourceId": "4233"
+                    }
+                },
+            ]
+        }
+    }
+}
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="get-table-columns" label="Get Table Columns" >
+```
+
+Query:
+```graphql
+query GetTableColumns($path: String = "4233.INTEGRATION.BEERS.BEERS") {
+    table(path: $path) {
+        columns{
+            prop{
+                name
+            }
+            uid
+        }
+    }
+}
+```
+
+Response:
+```json
+{
+    "data": {
+        "table": {
+            "columns": [
+                {
+                    "prop": {
+                        "name": "BEER_ID"
+                    },
+                    "uid": "ee072b52455548e992a93a63d2f4426a"
+                },
+                {
+                    "prop": {
+                        "name": "BEER_NAME"
+                    },
+                    "uid": "d9876abfa92240d0aabb8eb97b1fe7d1"
+                },
+                {
+                    "prop": {
+                        "name": "BEER_STYLE"
+                    },
+                    "uid": "b68742fc2c9941748bf844fa31185aae"
+                },
+                {
+                    "prop": {
+                        "name": "ABV"
+                    },
+                    "uid": "6da98be197c5433caaa8e83c0f4c395d"
+                },
+                {
+                    "prop": {
+                        "name": "IBU"
+                    },
+                    "uid": "0da0fba35dbc40c7895ec22d2deafc67"
+                },
+                {
+                    "prop": {
+                        "name": "BITTERNESS"
+                    },
+                    "uid": "63a46122cdf74a7fb6c2d80c6c68868c"
+                },
+                {
+                    "prop": {
+                        "name": "BREWERY_ID"
+                    },
+                    "uid": "01dbcde5b0f64a8eb4a7541cf4e228fd"
+                },
+                {
+                    "prop": {
+                        "name": "OUNCES"
+                    },
+                    "uid": "8004b82bee1d4159950a2d751ad97fd5"
+                }
+            ]
+        }
+    }
+}
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="create-tag" label="Create Tag" >
+```
+
+Mutation:
+```graphql
+mutation CreateTags($inputs: [TagInput]! = 
+[
+        {
+            name: "test123"
+        }
+    ]
+)
+{
+    createTags(inputs: $inputs)
+}
+```
+
+Response:
+```json
+{
+    "data": {
+        "createTags": [
+            "8f8e773c1e924c359b4eec8ad1a53faf"
+        ]
+    }
+}
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="attach-tag" label="Attach Tag" >
+```
+
+Mutation:
+```graphql
+mutation AttachTags($connections: [TagConnection!]! = [
+    {
+        tagUid: "8f8e773c1e924c359b4eec8ad1a53faf",
+        objectUids: [
+            "7e60a34d6e8c41068c03257ddf12a3eb",
+            "410124148bb7401398ebfc976a4bf14c",
+            "0a335a6ebfec4a018277fae82d9103d9",
+            "b68742fc2c9941748bf844fa31185aae"
+        ]
+    }
+]
+, $attached: Boolean = true){
+    attachTags(connections: $connections, attached: $attached)
+}
+```
+
+Response:
+```json
+{
+    "data": {
+        "attachTags": true
+    }
+}
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="get-downstream-columns" label="Get Downstream Columns" >
+```
+
+Query:
+```graphql
+query GetDownstreamColumns($uids: [ID!]! = ["b68742fc2c9941748bf844fa31185aae"]) {
+    columns(uids: $uids) {
+        page{
+            cursor
+            total
+            page
+            first
+        }
+        items{
+            downstream{
+                table{
+                    prop{
+                        path
+                    }
+                }
+                prop{
+                    name
+                    description
+                }
+                descriptions{
+                    userId
+                    description
+                }
+            uid
+            tags{
+                uid
+                name
+                attached
+                initialSource
+                }
+            }
+        }
+    }
+}
+```
+
+Response:
+```json
+{
+    "data": {
+        "columns": {
+            "page": {
+                "cursor": null,
+                "total": 1,
+                "page": 1,
+                "first": 1
+            },
+            "items": [
+                {
+                    "downstream": [
+                        {
+                            "table": {
+                                "prop": {
+                                    "path": "\"INTEGRATION\".\"BEERS\".\"BEERS_WITH_BREWERIES\""
+                                }
+                            },
+                            "prop": {
+                                "name": "BEER_STYLE",
+                                "description": null
+                            },
+                            "descriptions": [],
+                            "uid": "7e60a34d6e8c41068c03257ddf12a3eb",
+                            "tags": [
+                            ]
+                        },
+                        {
+                            "table": {
+                                "prop": {
+                                    "path": "\"INTEGRATION\".\"BEERS\".\"ORDERS_GENERATED\""
+                                }
+                            },
+                            "prop": {
+                                "name": "BEER_STYLE",
+                                "description": null
+                            },
+                            "descriptions": [],
+                            "uid": "410124148bb7401398ebfc976a4bf14c",
+                            "tags": [
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="search-by-tag" label="Search by Tag" >
+```
+
+Query:
+```graphql
+query GetSearchResults(
+  $query: String = ""
+  $paths: [String!] = "4233"
+  $first: Int = 100
+  $tagUids: [ID!] = [""]
+) {
+  search(query: $query, paths: $paths, first: $first, tagUids: $tagUids) {
+    results {
+      item {
+        __typename
+        ... on Column {
+          uid
+          table {
+            prop {
+              path
+              dataSourceId
+            }
+          }
+          tags{
+              uid
+              name
+          }
+        }
+      }
+      score
+    }
+    page {
+      first
+      page
+      total
+      cursor
+    }
+  }
+}
+```
+
+Response
+```json
+{
+    "data": {
+        "search": {
+            "results": [
+                {
+                    "item": {
+                        "__typename": "Column",
+                        "uid": "0a335a6ebfec4a018277fae82d9103d9",
+                        "table": {
+                            "prop": {
+                                "path": "\"INTEGRATION\".\"BEERS\".\"SALES\"",
+                                "dataSourceId": "4233"
+                            }
+                        },
+                        "tags": [
+                            {
+                                "uid": "8f8e773c1e924c359b4eec8ad1a53faf",
+                                "name": "test123"
+                            }
+                        ]
+                    },
+                    "score": 7.051488876342773
+                },
+                {
+                    "item": {
+                        "__typename": "Column",
+                        "uid": "b68742fc2c9941748bf844fa31185aae",
+                        "table": {
+                            "prop": {
+                                "path": "\"INTEGRATION\".\"BEERS\".\"BEERS\"",
+                                "dataSourceId": "4233"
+                            }
+                        },
+                        "tags": [
+                            {
+                                "uid": "8f8e773c1e924c359b4eec8ad1a53faf",
+                                "name": "test123"
+                            }
+                        ]
+                    },
+                    "score": 7.051488876342773
+                },
+                {
+                    "item": {
+                        "__typename": "Column",
+                        "uid": "7e60a34d6e8c41068c03257ddf12a3eb",
+                        "table": {
+                            "prop": {
+                                "path": "\"INTEGRATION\".\"BEERS\".\"BEERS_WITH_BREWERIES\"",
+                                "dataSourceId": "4233"
+                            }
+                        },
+                        "tags": [
+                            {
+                                "uid": "8f8e773c1e924c359b4eec8ad1a53faf",
+                                "name": "test123"
+                            }
+                        ]
+                    },
+                    "score": 6.28645658493042
+                },
+                {
+                    "item": {
+                        "__typename": "Column",
+                        "uid": "410124148bb7401398ebfc976a4bf14c",
+                        "table": {
+                            "prop": {
+                                "path": "\"INTEGRATION\".\"BEERS\".\"ORDERS_GENERATED\"",
+                                "dataSourceId": "4233"
+                            }
+                        },
+                        "tags": [
+                            {
+                                "uid": "8f8e773c1e924c359b4eec8ad1a53faf",
+                                "name": "test123"
+                            }
+                        ]
+                    },
+                    "score": 4.5709028244018555
+                }
+            ],
+            "page": {
+                "first": 100,
+                "page": 1,
+                "total": 4,
+                "cursor": null
+            }
+        }
+    }
+}
+```
+
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
 ## GraphQL Schema
 
 The API has the following schema:
