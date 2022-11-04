@@ -3,7 +3,7 @@ sidebar_position: 1
 title: Data Diff
 ---
 # Data Diff
-Data Diff enables teams to be proactive with their data testing. With Data Diff, you can easily validate migrations before breaking changes make it to production. 
+Data Diff enables teams to be proactive with their data testing. With Data Diff, you can easily validate that updates to your data pipelines won't cause breaking changes in production. 
 
 Data Diff automates regression testing with integration into the CI process through GitHub and GitLab. With Data Diff, you can validate every source code change and easily see how changes in your code impact the data produced across all rows and columns.
 

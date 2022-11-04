@@ -11,7 +11,7 @@ To include more details in your Catalog, you can sync metadata from dbt and your
 ## Column-level Lineage
 
 ![](../../static/img/lineage_detail.png)
-After connecting your data warehouse, Datafold analyzes every SQL statement that is used to create the tables and views. Then, Datafold produces a graph of dependencies to easily visualize dependencies. See how data is produced and consumed - even correlated subqueries, `CASE WHEN` statements, and other complex queries are covered.
+After connecting your data warehouse, Datafold parses the query logs to construct and visualize dependencies at both the table and column levels. See how data is produced, consumed, and transformed. Datafold supports complex queries, such as correlated subqueries, `CASE WHEN` statements, and window functions.
 
 No additional developer resources are needed to unlock this capability. Simply connect your data warehouse and explore your lineage graph. 
 
@@ -19,4 +19,5 @@ To view the column-level Lineage of any table in your warehouse:
 
 * Navigate to Catalog.
 * Click on any table in the Catalog.
-* Click on Lineage.
+* Click on the Lineage tab.
+* By default, table lineage will be shown. Click on the Columns dropdown of any table to view column-level lineage.
