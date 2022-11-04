@@ -20,4 +20,5 @@ To view the column-level Lineage of any table in your warehouse:
 * Navigate to Catalog.
 * Click on any table in the Catalog.
 * Click on the Lineage tab.
-* By default, table lineage will be shown. Click on the Columns dropdown of any table to view column-level lineage.
+* By default, table-level lineage will be shown. 
+* Click on the Columns dropdown of any table to view column-level lineage.
