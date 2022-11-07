@@ -4,13 +4,21 @@ title: Catalog + Column-level Lineage
 ---
 ## Catalog
 ![](../../static/img/catalog_landing.png)
-With the Datafold Catalog you can quickly see row counts, nulls and column distributions. We'll gather up this information and display it for every table and data source that you add. 
+With the Datafold Catalog, you can quickly see row counts, nulls, and column distributions for tables in your data warehouse.
 
-For more detail, you can sync metadata from dbt and your data warehouse to create a single source of truth. You can implement custom tags to easily categorize and filter the data sets. 
+To include more details in your Catalog, you can sync metadata from dbt and your data warehouse to create a single source of truth. You can implement custom tags to easily categorize and filter the data sets. 
 
 ## Column-level Lineage
-After connecting your data warehouse, Datafold analyzes every SQL statement and produces the graph of dependencies to easily visualize your data. See how data is produced and consumed - even correlated subqueries, CASE WHEN statements, and other complex queries are covered.
-
-No additional developer resources are needed, simply connect your data warehouse and you can explore your lineage graph. 
 
 ![](../../static/img/lineage_detail.png)
+After connecting your data warehouse, Datafold parses the query logs to construct and visualize dependencies at both the table and column levels. See how data is produced, consumed, and transformed. Datafold supports complex queries, such as correlated subqueries, `CASE WHEN` statements, and window functions.
+
+No additional developer resources are needed to unlock this capability. Simply connect your data warehouse and explore your lineage graph. 
+
+To view the column-level Lineage of any table in your warehouse:
+
+* Navigate to Catalog.
+* Click on any table in the Catalog.
+* Click on the Lineage tab.
+* By default, table-level lineage will be shown. 
+* Click on the Columns dropdown of any table to view column-level lineage.
