@@ -3,6 +3,11 @@ sidebar_position: 3
 title: datafold-sdk
 ---
 
+* [Prerequisites](datafold-sdk.md#prerequisites)
+* [Config](datafold-sdk.md#config)
+* [Bash SDK Example](datafold-sdk.md#bash-sdk-example)
+* [Python SDK Example](datafold-sdk.md#python-sdk-example)
+
 Datafold allows you to trigger data diffs from CI using the [datafold-sdk](https://pypi.org/project/datafold-sdk/). This allows you to easily integrate Datafold in your CI with arbitrary pipeline orchestrators (e.g. Airflow, Dagster, Prefect).
 
 ## Prerequisites
