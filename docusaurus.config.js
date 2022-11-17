@@ -140,6 +140,21 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
+    plugins: [
+      [
+        '@docusaurus/plugin-client-redirects',
+        {
+          redirects: [
+            {
+              to: '/integrations/data_warehouses/content/snowflake',
+              from: '/getting-started/data-warehouses/snowflake',
+            },
+          ],
+        },
+      ],
+    ],
+  
 };
 
 module.exports = config;
