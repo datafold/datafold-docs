@@ -19,12 +19,7 @@ If a database is not on the list, we'd still love to support it. Please [open an
 | Trino         | `trino://<username>:<password>@<hostname>:8080/<database>`                                                                          |  💛    |
 | Clickhouse    | `clickhouse://<username>:<password>@<hostname>:9000/<database>`                                                                     |  💛    |
 | Vertica       | `vertica://<username>:<password>@<hostname>:5433/<database>`                                                                        |  💛    |
-| ElasticSearch |                                                                                                                                     |  📝    |
-| Planetscale   |                                                                                                                                     |  📝    |
-| Pinot         |                                                                                                                                     |  📝    |
-| Druid         |                                                                                                                                     |  📝    |
-| Kafka         |                                                                                                                                     |  📝    |
-| DuckDB        |                                                                                                                                     |  📝    |
+| DuckDB        | `duckdb://<database>@<dbpath>`                                                                                                      |  💛    |
 | SQLite        |                                                                                                                                     |  📝    |
 
 * 💚: Implemented and thoroughly tested.

@@ -36,6 +36,8 @@ Then, you will need to install one or more driver(s) specific to the database(s)
 
 - `pip install 'data-diff[vertica]'`
 
+- `pip install 'data-diff[duckdb]'`
+
 - For BigQuery, see: https://pypi.org/project/google-cloud-bigquery/
 
 You can also install several drivers at once:
