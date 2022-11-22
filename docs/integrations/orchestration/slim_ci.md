@@ -6,7 +6,7 @@ description: Running only the diffs you need
 
 By default, Datafold will run Data Diffs on any models that are edited in the Pull Request as well as any downstream models.
 
-In some cases, this leads to too much diffing and overwhelming and unhelpful results. That's why we've created the Slim CI configuration, which only diffs modified models. You still have the option of diffing individual downstream models, or automatically diffing all downstreams.
+In some cases, this leads to too much diffing, which can be overwhelming and slow. That's why we've created the Slim CI configuration, which only diffs modified models. You still have the option of diffing individual downstream models, or automatically diffing all downstreams.
 
 <iframe width="640" height="414" src="https://www.loom.com/share/ab29774ab6314df6bcc4dd70a5e75aa9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
