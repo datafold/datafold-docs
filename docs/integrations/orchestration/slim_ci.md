@@ -18,13 +18,15 @@ To enable Slim CI by default on all future commits that are pushed to GitHub or 
 
 When you push a change, you'll see that Data Diffs have been run for only the modified models.
 
-<img width="1008" alt="Screen Shot 2022-11-22 at 10 32 57 AM" src="https://user-images.githubusercontent.com/1799931/203393861-05e0a537-3cc2-4647-8456-2067dd4e5dd5.png">
+<img width="1008" alt="Screen Shot 2022-11-22 at 10 32 57 AM" src="https://user-images.githubusercontent.com/1799931/203394628-3000ca4d-fd00-40c6-a865-1161a60d014f.png">
 
-You have the option within the PR to click and run any downstream Data Diffs.
+This Pull Request has one modified data model, for which a Data Diff was run. That model has two downstream dependent models, which were identified, but Data Diffs were not run.
+
+You also have the option within the PR to click and run any downstream Data Diffs.
 
 <img width="857" alt="Screen Shot 2022-11-22 at 10 33 31 AM" src="https://user-images.githubusercontent.com/1799931/203393999-0499c241-c74d-4715-b30b-7652877a2aa0.png">
 
-You can also apply the `datafold:full` label to the PR, which will automatically run all downstream Data Diffs.
+Finally, you can apply the `datafold:full` label to the PR, which will automatically run all downstream Data Diffs.
 
 <img width="984" alt="Screen Shot 2022-11-22 at 10 34 12 AM" src="https://user-images.githubusercontent.com/1799931/203394318-414e5f48-7310-4926-baa8-84b76ddebbf6.png">
 
