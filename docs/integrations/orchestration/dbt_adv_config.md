@@ -9,10 +9,10 @@ description: Advanced configuration options for dbt projects
 ### Prerequisites
 
 - To configure dbt Cloud, you must first connect a [Data Source](integrations/data_warehouses/dw_overview.md) and connect a [GitHub](/integrations/git/github.md) or [GitLab](/integrations/git/gitlab.md) account.
-
+## Primary Keys
 ### **Tag primary keys in dbt model**
 
-Datafold needs to know which column is the primary key of the table to perform the diff. When Datafold cannot determine the primary key of the two tables to diff, and will produce an error:
+Datafold needs to know which column is the primary key of the table to perform the diff. When Datafold cannot determine the primary key of the two tables to diff, it will produce an error:
 
 ![](../../../static/img/primary_key_not_set.png)
 
@@ -20,84 +20,63 @@ When setting up the CI integration, one of the steps is providing the primary ke
 
 ![](../../../static/img/primary_key_tag.png)
 
-We use this in the dbt metadata to let Datafold know which column can be used to perform the diff. Datafold supports composite primary keys, meaning that you can assign multiple columns that make up the primary key together. There are three ways of doing this, which we'll discuss next:
+We use this in the dbt metadata to let Datafold know which column can be used to perform the diff. Datafold supports composite primary keys, meaning that you can assign multiple columns that make up the primary key together.
 
-#### Metadata
+### Metadata
 
-The first option is setting the `primary-key` tag in the dbt metadata. There are [several ways to configure this](https://docs.getdbt.com/reference/resource-configs/meta) in your dbt project using either the `meta` key in a yaml file or a model-specific config block.
+The first option is setting the `primary-key` key in the dbt metadata. There are [several ways to configure this](https://docs.getdbt.com/reference/resource-configs/meta) in your dbt project using either the `meta` key in a yaml file or a model-specific config block.
 
 Here's an example of how you would specify that the `user_id` column is the primary key of the `users` table in a yaml file.
 
-```
+```yaml
 models:
   - name: users
-
     columns:
       - name: user_id
         meta:
           primary-key: true
 ```
 
-Table metadata can also be used to specify per-model diff options. In the example below, diff is configured to compare only rows matching `user_id > 2350`. The expression in the filter is an SQL expression, and can be anything you could put into `where` clause when selecting from the tables.
-
-You can also include (`include_columns`) or exclude (`exclude_columns`) columns which will be used when diffing.
-
-For time dimensions, you can set a time column of \`time\_travel\` field. If you want to add time travelling, you can define `prod_time_travel` for travelling of a production model,  `pr_time_travel` of a PR model. Please keep in mind that not all databases support time traveling.
-
-```
+In the case of a compound Primary Key, you can assign a second column (or more):
+```yaml
 models:
   - name: users
-    meta:
-      datafold:
-        datadiff:
-          filter: "user_id > 2350"
-          include_columns:
-            - user_id
-            - created_at
-            - name
-          exclude_columns:
-            - full_name
-          prod_time_travel:
-            - 2022-02-07T00:00:00
-          pr_time_travel:
-            - 2022-02-07T00:00:00
-          time_column:
-            - created_at
-          
     columns:
       - name: user_id
         meta:
           primary-key: true
-                    
-          
-# In the case of a compound Primary Key, you can assign a second column (or more)
       - name: version_id
         meta:
           primary-key: true
 ```
 
-#### Tags
+### Tags
 
 If the primary key is not found in the metadata, it will go through the [tags](https://docs.getdbt.com/reference/resource-properties/tags).
 
-```
+```yaml
 models:
   - name: users
     columns:
       - name: user_id
         tags:
           - primary-key
-# In the case of a compound Primary Key, you can assign a second column (or more)
+```
+In the case of a compound Primary Key, you can assign a second column (or more):
+```yaml
+models:
+  - name: users
+    columns:
       - name: version_id
         tags:
           - primary-key
 ```
 
-#### Inferred
+### Inferred
 
 If the primary key isn't provided explicitly, Datafold will try to assume a primary key from dbt's uniqueness tests. If you have a single column uniqueness test defined, it will use this column as the PK.
 
-```
+```yaml
 models:
   - name: users
     columns:
@@ -108,7 +87,7 @@ models:
 
 Also, model level uniqueness tests are used for inferring the PK.
 
-```
+```yaml
 models:
   - name: sales
     columns:
@@ -128,10 +107,10 @@ models:
       - unique:
           column_name: "CONCAT(col1, col2)"
 ```
-
+### Combination of Columns Primary Key
 Finally, we support `unique_combination_of_columns` from the `dbt_utils` package:
 
-```
+```yaml
 models:
   - name: users
     columns:
@@ -147,23 +126,23 @@ models:
 
 Keep in mind that this is a failover mechanism. If you change the uniqueness test, this will also impact the way Datafold performs the diff.
 
-#### Checking primary key annotations
+### Checking primary key annotations
 
 You can check what models in your dbt repo already have primary key annotations, and which need more attention. You'll need to install Datafold SDK and configure access parameters.
 
-```
-$ pip3 install 'datafold-sdk>=0.0.6'
+```bash
+$ pip3 install 'datafold-sdk'
 
 # skip this step if you are using app.datafold.com
 $ export DATAFOLD_HOST=https://<hostname>
 
 # get your API key in Datafold UI -> Edit Profile -> API Key
-$ export DATAFOLD_APIKEY=RSSQrpfddSEEK8WVtc0zd27f9nsdhPU3AxZ
+$ export DATAFOLD_APIKEY=Ratc0zd27hjkhjfgPU3AxZ
 ```
 
 After that, you need to compile `manifest.json`, and you'll be ready to do the check.
 
-```
+```bash
 # Lookup your CI configuration id in URL when you go to Settings -> CI settings -> <name>:
 # https://app.datafold.com/settings/ci_integrations/14
 
@@ -194,13 +173,66 @@ The other fields in the printout are:
 * sql file that contains model definition,
 * "patch" yml file that has dbt configuration of the model.
 
+
+## Other Advanced Configuration
+Table metadata can also be used to specify per-model diff options. 
+
+### Filter
+In the example below, diff is configured to compare only rows matching `user_id > 2350`. The expression in the filter is a SQL expression, and can be anything you could put into `where` clause when selecting from the tables.
+
+```yaml
+models:
+  - name: users
+    meta:
+      datafold:
+        datadiff:
+          filter: "user_id > 2350"
+```
+
+This field is also commonly used to scope diffs to a small time period.
+
+Example: `filter: "source_timestamp >= current_date() - 7"`
+
+### Include and Exclude
+You can include (`include_columns`) or exclude (`exclude_columns`) columns in the diff.
+
+```yaml
+models:
+  - name: users
+    meta:
+      datafold:
+        datadiff:
+          include_columns:
+            - user_id
+            - created_at
+            - name
+          exclude_columns:
+            - full_name
+```
+### Time Travel
+For time dimensions, you can set a time column of \`time\_travel\` field. If you want to add time travelling, you can define `prod_time_travel` for travelling of a production model,  `pr_time_travel` of a PR model. Please keep in mind that not all databases support time traveling.                   
+
+```yaml
+models:
+  - name: users
+    meta:
+      datafold:
+        datadiff:
+          prod_time_travel:
+            - 2022-02-07T00:00:00
+          pr_time_travel:
+            - 2022-02-07T00:00:00
+          time_column:
+            - created_at
+```
+
 ### dbt metadata synchronization
 
 Datafold integrates very well with dbt, and also has the ability to ingest the metadata provided by dbt automatically. dbt models have metadata that can be synchronized from the production branch into the Datafold catalog. When a table has metadata being synchronized using dbt, user editing is no longer permitted for that entire table. This is to ensure that there is a single source of truth.
 
 Metadata can be applied both on a table and column level.
 
-```
+```yaml
 models:
   - name: users
     description: "Description of the table"
