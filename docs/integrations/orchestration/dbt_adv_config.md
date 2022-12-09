@@ -10,7 +10,7 @@ description: Advanced configuration options for dbt projects
 
 - To configure dbt Cloud, you must first connect a [Data Source](integrations/data_warehouses/dw_overview.md) and connect a [GitHub](/integrations/git/github.md) or [GitLab](/integrations/git/gitlab.md) account.
 ## Primary Keys
-### **Tag primary keys in dbt model**
+### **Tag primary keys in dbt models**
 
 Datafold needs to know which column is the primary key of the table to perform the diff. When Datafold cannot determine the primary key of the two tables to diff, it will produce an error:
 
