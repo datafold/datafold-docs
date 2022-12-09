@@ -137,7 +137,7 @@ $ pip3 install 'datafold-sdk'
 $ export DATAFOLD_HOST=https://<hostname>
 
 # get your API key in Datafold UI -> Edit Profile -> API Key
-$ export DATAFOLD_APIKEY=Ratc0zd27hjkhjfgPU3AxZ
+$ export DATAFOLD_APIKEY=<your_api_key>
 ```
 
 After that, you need to compile `manifest.json`, and you'll be ready to do the check.
