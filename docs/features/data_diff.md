@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Data Diff
+title: What is Data Diff?
 ---
 # Data Diff
 Data Diff enables teams to be proactive with their data testing. With Data Diff, you can easily validate that updates to your data pipelines won't cause breaking changes in production. 
