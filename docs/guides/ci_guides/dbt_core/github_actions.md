@@ -252,3 +252,29 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
           SNOWFLAKE_SCHEMA: "${{ format('{0}_{1}', 'PR_NUM', steps.findPr.outputs.pr) }}"
 ```
+
+### Skip Diffing for Draft Pull Requests
+
+In the example `dbt_staging` job provided in the [Advanced Pull Request Job](#advanced-pull-request-job) section, once a pull request is opened, _every subsequent push_ will trigger the `dbt_staging` job. If an open pull request is a work-in-progress, running staging on each push can become noisy and expensive.
+
+By incorporating the below modifications, pull requests marked as a draft will skip the staging job. Once marked as a draft, developers can push commits until the pull request is marked ready for review, at which point the staging job will run.
+
+```yml
+name: dbt staging
+
+on:
+  pull_request:
+    types:
+    - opened
+    - reopened
+    - synchronize
+    - ready_for_review
+  push:
+    branches:
+      - '!main'
+
+jobs:
+  run:
+    runs-on: ubuntu-20.04
+    if: ${{ !github.event.pull_request.draft }}
+```
