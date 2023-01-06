@@ -2,7 +2,7 @@
 
 First, read through the [CONTRIBUTING.md](https://github.com/datafold/data-diff/blob/master/CONTRIBUTING.md) document.
 
-Make sure data-diff is set up for development, and that all the tests pass (try to at least set it up for mysql and postgresql).
+Make sure Open Source Data Diff is set up for development, and that all the tests pass (try to at least set it up for mysql and postgresql).
 
 Look at the other database drivers for examples and inspiration.
 
@@ -22,7 +22,7 @@ Example:
 
 This way, users can install the dependencies needed for your database driver, with `pip install 'data-diff[postgresql]'`.
 
-This way, data-diff can support a wide variety of drivers, without requiring our users to install libraries that they won't use.
+This way, Open Source Data Diff can support a wide variety of drivers, without requiring our users to install libraries that they won't use.
 
 
 ## 2. Implement the database module
@@ -92,7 +92,7 @@ Documentation:
 
 ### `TYPE_CLASSES`
 
-Each database class must have a `TYPE_CLASSES` dictionary, which maps between the string data-type, as returned by querying the table schema, into the appropriate data-diff type class, i.e. a subclass of `database_types.ColType`.
+Each database class must have a `TYPE_CLASSES` dictionary, which maps between the string data-type, as returned by querying the table schema, into the appropriate Open Source Data Diff type class, i.e. a subclass of `database_types.ColType`.
 
 ### `ROUNDS_ON_PREC_LOSS`
 

@@ -2,7 +2,7 @@
 title: How to install
 ---
 
-Installing `data-diff` is as easy as using `pip`:
+Installing Open Source Data Diff is as easy as using `pip`:
 
 ```
 pip install data-diff

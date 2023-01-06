@@ -3,7 +3,7 @@ sidebar_position: 1
 title: Command line
 ---
 
-Once you've installed data-diff using `pip`, it should be available through the `data-diff` command.
+Once you've installed Open Source Data Diff using `pip`, it should be available through the `data-diff` command.
 
 Run it without any arguments to get the "help" text:
 
@@ -24,15 +24,15 @@ Options:
 
 Let's break this down. Assume there are two tables stored in two different databases, and you want to know the differences between those tables.
 
-- `database_a` will be a string that `data-diff` uses to connect to the database where the first table is stored.
+- `database_a` will be a string that Open Source Data Diff uses to connect to the database where the first table is stored.
 - `table_a` is the name of the table in the first database.
-- `database_b` will be a string that `data-diff` uses to connect to the database where the second table is stored.
+- `database_b` will be a string that Open Source Data Diff uses to connect to the database where the second table is stored.
 - `table_b` is the name of the second table in the second database.
 - `[OPTIONS]` can be replaced with a variety of additional commands, [detailed here](#options).
 
 Usually, `database_a` and `database_b` will be URL connection strings. However, when `--conf` is specified, they can also be the names of the database configurations defined in a [TOML configuration file](./how_to_use_with_toml).
 
-Note that if `database_a` and `database_b` are the same, data-diff will automatically opt for using the in-db diff, despite the "cross-db syntax". To force a specific algorithm, you can use the `--algorithm` switch.
+Note that if `database_a` and `database_b` are the same, Open Source Data Diff will automatically opt for using the in-db diff, despite the "cross-db syntax". To force a specific algorithm, you can use the `--algorithm` switch.
 
 
 #### Code Example: Diff Tables Between Databases
@@ -55,7 +55,7 @@ What these switches mean:
 - `-c` is an additional, non-key column to diff.
 - `-w`, or `--where`, is an arbitrary SQL expression to filter the table.
 
-Be sure to review and reference all the options you may use to construct your data-diff commands, which are documented [here](./options).
+Be sure to review and reference all the options you may use to construct your Open Source Data Diff commands, which are documented [here](./options).
 
 #### Code Example: Diff Tables Within a Database
 

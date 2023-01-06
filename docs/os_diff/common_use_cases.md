@@ -15,14 +15,14 @@ title: Common Use Cases
   missing.
 
 * **Debug complex data pipelines.** Data can get lost in pipelines that
-  may span a half-dozen systems. **data-diff** helps you efficiently track down 
+  may span a half-dozen systems. Open Source Data Diff helps you efficiently track down 
   where a row got lost without needing to individually inspect intermediate datastores. 
 
 * **Detect hard deletes for an `updated_at`-based pipeline**. If you're
-  copying data to your warehouse based on an `updated_at`-style column, **data-diff** 
+  copying data to your warehouse based on an `updated_at`-style column, Open Source Data Diff
   can find any hard-deletes that you may have missed.
 
-* **Make your replication self-healing.** You can use **data-diff** to
+* **Make your replication self-healing.** You can use Open Source Data Diff to
   self-heal by using the diff output to write/update rows in the target
   database.
 

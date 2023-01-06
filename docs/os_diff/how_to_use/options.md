@@ -4,9 +4,9 @@ title: Options
 ---
 
 
-You can use the following options to specify the configuration of a data-diff run.
+You can use the following options to specify the configuration of a Open Source Data Diff run.
 
-- **Config Key**: Use this syntax when using a [TOML configuration file](./how_to_use_with_toml.md) or [using data-diff with Python](./how_to_use_with_python.md).
+- **Config Key**: Use this syntax when using a [TOML configuration file](./how_to_use_with_toml.md) or [using Open Source Data Diff with Python](./how_to_use_with_python.md).
 ```
 # Specify the default run parameters
 [run.default]
@@ -44,4 +44,4 @@ data-diff DB1_URI TABLE1_NAME DB2_URI TABLE2_NAME --debug --v -k order_id
 | Output | `materialize` | `-m`, `--materialize` | Materialize the diff results into a new table in the database. If a table exists by that name, it will be replaced. Use `%t` in the name to place a timestamp. Example: `-m test_mat_%t` | ✅ |  |
 | Output | `table_write_limit` | `--table-write-limit` | Maximum number of rows to write when creating materialized or sample tables, per thread. Default=1000. | ✅ |  |
 | Settings | | `--conf`, `--run` | Specify the run and configuration [from a TOML file](how_to_use_with_toml.md). | ✅ | ✅ |
-| Settings | `no_tracking` | `--no-tracking` | data-diff sends home anonymous usage data. Use this to disable it. | ✅ | ✅ |
+| Settings | `no_tracking` | `--no-tracking` | Open Source Data Diff sends home anonymous usage data. Use this to disable it. | ✅ | ✅ |

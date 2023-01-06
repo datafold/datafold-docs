@@ -4,9 +4,9 @@ title: Usage Analytics & Data Privacy
 
 # Usage Analytics & Data Privacy
 
-data-diff collects anonymous usage data to help our team improve the tool and to apply development efforts to where our users need them most.
+Open Source Data Diff collects anonymous usage data to help our team improve the tool and to apply development efforts to where our users need them most.
 
-We capture two events: one when the data-diff run starts, and one when it is finished. No user data or potentially sensitive information is or ever will be collected. The captured data is limited to:
+We capture two events: one when the Open Source Data Diff run starts, and one when it is finished. No user data or potentially sensitive information is or ever will be collected. The captured data is limited to:
 
 - Operating System and Python version
 - Types of databases used (postgresql, mysql, etc.)

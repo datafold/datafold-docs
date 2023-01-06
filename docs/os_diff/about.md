@@ -2,7 +2,7 @@
 title: About
 ---
 
-#### data-diff enables data professionals to detect differences in values between any two tables. 
+#### Open Source Data Diff enables data professionals to detect differences in values between any two tables. 
 It's fast, easy to use, and reliable. Even at massive scale.
 
 [Join us on GitHub](https://github.com/datafold/data-diff) if you'd like to contribute to this open source library!
@@ -19,7 +19,7 @@ It's fast, easy to use, and reliable. Even at massive scale.
 
 
 
-### Here's a list of amazing things `data-diff` can do!
+### Here's a list of amazing things Open Source Data Diff can do!
 
 * ⇄  Verifies across [many different databases](/docs/os_diff/databases_we_support.md) (e.g., PostgreSQL ⇄ Snowflake) or within a database
 * 🔍 Outputs diff of rows in detail
@@ -28,4 +28,4 @@ It's fast, easy to use, and reliable. Even at massive scale.
 * 🔥 Verify 25M+ rows in <10s, and 1B+ rows in ~5min.
 * ♾️  Works for tables with 10s of billions of rows
 
-Read more about our [common use cases](/docs/os_diff/common_use_cases.md), or jump right in and [install data-diff](/docs/os_diff/how_to_install.md) and run your first diff.
+Read more about our [common use cases](/docs/os_diff/common_use_cases.md), or jump right in and [install Open Source Data Diff](/docs/os_diff/how_to_install.md) and run your first diff.

@@ -3,7 +3,7 @@ sidebar_position: 2
 title: TOML configuration file
 ---
 
-Data-diff lets you load the configuration for a run from [a TOML configuration file](https://toml.io/en/).
+Open Source Data Diff lets you load the configuration for a run from [a TOML configuration file](https://toml.io/en/).
 
 **Why use a TOML configuration file?**
 
@@ -11,9 +11,9 @@ Data-diff lets you load the configuration for a run from [a TOML configuration f
 - Easier and more readable: you can define the database connection settings as config values in a separate file, instead of a URI typed into the command line.
 - Configurable: Gives you fine-grained control over the settings switches, without requiring any Python code.
 
-In other words, you don't have to repeatedly enter verbose information such as URI strings or options every time you run a diff. This becomes even more handy as you use data-diff frequently in your workflow.
+In other words, you don't have to repeatedly enter verbose information such as URI strings or options every time you run a diff. This becomes even more handy as you use Open Source Data Diff frequently in your workflow.
 
-**How is a TOML configuration file set up for data-diff?**
+**How is a TOML configuration file set up for Open Source Data Diff?**
 
 There are two main sections:
 
@@ -39,8 +39,8 @@ By setting up a TOML file like this:
   user = "your_username"
   password = "your_password"
 
-# DATA-DIFF RUN PARAMETERS
-# In this section, you can specify default run parameters that will be used by data-diff,
+# Open Source Data Diff RUN PARAMETERS
+# In this section, you can specify default run parameters that will be used by Open Source Data Diff,
 # as well as parameters for one or more named runs that you can use from the command line.
 
 # Specify the default run parameters
@@ -73,12 +73,12 @@ data-diff \
 ```
 
 - `--conf` specifies a path to the configuration file.
-- `--run` specifies the parameters defined in your TOML file that will be used by data-diff.
+- `--run` specifies the parameters defined in your TOML file that will be used by Open Source Data Diff.
 - Optional: `-k` and `-w` are examples of parameters that have not been set in the TOML configuration file, and are defined in the command line.
 
 In summary, the command above will compare between `orders` and `orders_backup` using the `analytics` run, while also using additional parameters: `-k` and `-w`.
 
-**Note:** When defining how a run connects to a database, you can use a URI string (similar to the CLI command you would write in the absence of a TOML configuration file) instead of a database defined in `DATA-DIFF RUN PARAMETERS`:
+**Note:** When defining how a run connects to a database, you can use a URI string (similar to the CLI command you would write in the absence of a TOML configuration file) instead of a database defined in `OPEN SOURCE DATA DIFF RUN PARAMETERS`:
 
 ```python
   # Source 1 ("left")
@@ -90,7 +90,7 @@ In summary, the command above will compare between `orders` and `orders_backup` 
 
 Because Snowflake has several unique settings that aren't used to connect to other databases, your TOML configuration needs to be structured a bit differently.
 
-Here's an example of how to configure a Snowflake database in a TOML configuration file. In this example, the data-diff run is configured to compare Postgres data with Snowflake data, as you would when validating cross-database replication.
+Here's an example of how to configure a Snowflake database in a TOML configuration file. In this example, the Open Source Data Diff run is configured to compare Postgres data with Snowflake data, as you would when validating cross-database replication.
 
 ```python
 # DATABASE CONNECTION INFORMATION
