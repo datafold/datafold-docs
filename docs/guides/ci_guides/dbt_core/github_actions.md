@@ -255,7 +255,7 @@ jobs:
 
 ### Skip Diffing for Draft Pull Requests
 
-In the example `dbt_staging` job provided in the [Advanced Pull Request Job](#advanced-pull-request-job) section, once a pull request is opened, _every subsequent push_ will trigger the `dbt_staging` job. If an open pull request is a work-in-progress, running staging on each push can become noisy and expensive.
+In the example `dbt_staging` job provided in the [Advanced Pull Request Job](#advanced-pull-request-job) section, once a pull request is opened, _each subsequent push_ will trigger the `dbt_staging` job. If an open pull request is a work-in-progress, running staging on each push can become noisy and expensive.
 
 By incorporating the below modifications, pull requests marked as a draft will skip the staging job. Once marked as a draft, developers can push commits until the pull request is marked ready for review, at which point the staging job will run.
 
